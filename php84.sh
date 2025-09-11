@@ -221,7 +221,8 @@ install_php_84_source()
     libcurl-devel \
     libpng libpng-devel libjpeg-devel libavif-devel freetype-devel libwebp-devel libXpm-devel \
     libsodium-devel \
-    readline-devel
+    readline-devel \
+    libxslt-devel
     
     dnf --enablerepo=crb install -y oniguruma-devel libzip-devel
     
@@ -249,6 +250,11 @@ install_php_84_source()
     --enable-pcntl \
     --with-readline \
     --enable-calendar \
+    --enable-sysvsem --enable-sysvshm \
+    --enable-shmop \
+    --enable-soap \
+    --with-gettext \
+    --with-xsl \
     --with-pear
     
     make -j$(nproc)
@@ -284,10 +290,12 @@ uninstall_php()
     if [ "$INSTALL_TYPE" = "remirepo" ]; then
         dnf remove -y php php-mysqlnd php-gd php-bcmath php-intl php-zip php-posix
     else
-        rm -rf ${PHP_INSTALL_DIR}
-        
-        #  systemctl disable php-fpm.service
+        systemctl stop php-fpm.service
+        systemctl disable php-fpm.service
         rm -rf /etc/systemd/system/php-fpm.service
+        systemctl daemon-reload
+        
+        rm -rf ${PHP_INSTALL_DIR}
     fi
 }
 
