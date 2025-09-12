@@ -44,20 +44,11 @@ EOF
     
     ./php_phpmyadmin.sh install
     
-    systemctl daemon-reload
-    systemctl enable php-fpm.service
-    systemctl enable nginx.service
-    systemctl start php-fpm.service
-    systemctl start nginx.service
+    systemctl reload nginx.service
 }
 
 uninstall_lnmp()
-{
-    systemctl stop php-fpm.service
-    systemctl stop nginx.service
-    systemctl disable php-fpm.service
-    systemctl disable nginx.service
-    
+{   
     ./php84.sh -a uninstall
     ./php_composer.sh uninstall
     ./nginx.sh -a uninstall

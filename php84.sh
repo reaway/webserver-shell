@@ -128,15 +128,6 @@ php_fpm_service_add()
 {
     log_info 'Copy php-fpm init.d file...'
     
-    # # 传统SysVinit服务管理：
-    # yum install -y chkconfig
-    # cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-    # chmod +x /etc/init.d/php-fpm
-    # # 启动服务：
-    # service php-fpm start
-    # # 开机自启动：
-    # chkconfig php-fpm on
-    
     # 现代Systemd服务管理：
     # cp sapi/fpm/php-fpm.service /etc/systemd/system/php-fpm.service
       cat > /etc/systemd/system/php-fpm.service <<EOF
@@ -155,11 +146,11 @@ PrivateTmp=false
 [Install]
 WantedBy=multi-user.target
 EOF
-    #  # 启动服务：
-    #  systemctl start php-fpm.service
-    #  # 开机自启动：
-    #  systemctl daemon-reload
-    #  systemctl enable php-fpm.service
+    systemctl daemon-reload
+    # 开机自启动：
+    systemctl enable php-fpm.service
+    # 启动服务：
+    systemctl start php-fpm.service
 }
 
 set_php_ini()

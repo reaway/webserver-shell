@@ -97,11 +97,11 @@ PrivateTmp=false
 [Install]
 WantedBy=multi-user.target
 EOF
-    #  # 启动服务：
-    #  systemctl start nginx.service
-    #  # 开机自启动：
-    #  systemctl daemon-reload
-    #  systemctl enable nginx.service
+    systemctl daemon-reload
+    # 开机自启动：
+    systemctl enable nginx.service
+    # 启动服务：
+    systemctl start nginx.service
     
     cd ..
     rm -rf nginx-${NGINX_VERSION}

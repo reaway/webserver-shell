@@ -208,55 +208,58 @@ init_data_dir()
 
 set_auto_start()
 {
-    yum install -y chkconfig
-    
-    # init
-    \cp ${MYSQL_INSTALL_DIR}/support-files/mysql.server /etc/init.d/mysql
-    chmod +x /etc/init.d/mysql
-    
-    # system
-    cat > /etc/systemd/system/mysql.service <<EOF
+    # 现代Systemd服务管理
+    cat > /etc/systemd/system/mysqld.service <<EOF
 [Unit]
-Description=MySQL Community Server
-After=network.target syslog.target
+Description=MySQL Server
+Documentation=man:mysqld(8)
+Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
+After=network.target
+After=syslog.target
 
 [Service]
-Type=forking
+User=mysql
+Group=mysql
 
-ExecStart=/etc/init.d/mysql start
-ExecStop=/etc/init.d/mysql stop
-ExecReload=/etc/init.d/mysql reload
+# Have mysqld write its state to the systemd notify socket
+Type=notify
 
-Restart=no
+# Disable service start and stop timeout logic of systemd for mysqld service.
+TimeoutSec=0
+
+# Start main service
+ExecStart=${MYSQL_INSTALL_DIR}/bin/mysqld --defaults-file=/etc/my.cnf \$MYSQLD_OPTS
+
+# Use this to switch malloc implementation
+EnvironmentFile=-/etc/sysconfig/mysql
+
+# Sets open_files_limit
+LimitNOFILE = 10000
+
+Restart=on-failure
+
+RestartPreventExitStatus=1
+
+# Set environment variable MYSQLD_PARENT_PID. This is required for restart.
+Environment=MYSQLD_PARENT_PID=1
+
 PrivateTmp=false
 
 [Install]
 WantedBy=multi-user.target
 EOF
-    
-    if command -v systemctl &>/dev/null; then
-        systemctl daemon-reload
-        systemctl enable mysql.service
-    else
-        chkconfig --add mysql
-        chkconfig mysql on
-    fi
+    systemctl daemon-reload
+    systemctl enable mysqld.service
+    systemctl start mysqld.service
 }
 
 reset_root_password()
 {
     mysqlpwd=`tr -dc 'A-Za-z0-9!@#$%^&*()' < /dev/urandom | head -c 16`
-    if command -v systemctl &>/dev/null; then
-        systemctl start mysql.service
-    else
-        service mysql start
-    fi
-    
     ${MYSQL_INSTALL_DIR}/bin/mysqladmin -u root password "${mysqlpwd}"
     log_info "============================================================================================"
     log_info ">>> MySQL ${MYSQL_VERSION} 安装完成!"
-    log_info ">>> systemd 管理(推荐，自启): systemctl {start|stop|reload} mysql"
-    log_info ">>> init.d 管理(仅手动): service {start|stop|restart|reload|force-reload|status} mysql"
+    log_info ">>> systemd管理: systemctl {start|stop|reload} mysqld"
     log_info ">>> 初始 root 密码: ${mysqlpwd}"
 }
 
