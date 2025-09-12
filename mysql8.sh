@@ -234,7 +234,7 @@ ExecStart=${MYSQL_INSTALL_DIR}/bin/mysqld --defaults-file=/etc/my.cnf \$MYSQLD_O
 EnvironmentFile=-/etc/sysconfig/mysql
 
 # Sets open_files_limit
-LimitNOFILE = 10000
+LimitNOFILE=10000
 
 Restart=on-failure
 
@@ -368,7 +368,6 @@ install_mysql()
     fi
     
     yum remove -y mysql-server mysql mysql-libs mariadb-server mariadb mariadb-libs
-    
     yum install -y wget tar
     
     if ! id ${USER} &>/dev/null; then
@@ -404,21 +403,14 @@ uninstall_mysql()
         exit 0
     fi
     
-    if command -v systemctl &>/dev/null; then
-        systemctl stop mysql.service
-        systemctl disable mysql.service
-        rm -rf /etc/systemd/system/mysql.service
-        systemctl daemon-reload
-    else
-        service mysql stop
-        chkconfig mysql off
-        chkconfig --del mysql
-    fi
+    systemctl stop mysqld.service
+    systemctl disable mysqld.service
+    rm -rf /etc/systemd/system/mysqld.service
+    systemctl daemon-reload
     
     rm -rf ${MYSQL_INSTALL_DIR}
     
     rm -rf /etc/my.cnf
-    rm -rf /etc/init.d/mysql
     rm -f /etc/profile.d/mysql.sh
     
     log_info 'MySQL 已卸载'
