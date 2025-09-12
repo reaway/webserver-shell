@@ -370,7 +370,7 @@ install_mysql()
     
     if ! id ${USER} &>/dev/null; then
         groupadd ${GROUP}
-        useradd -s /sbin/nologin -g ${GROUP} ${USER}
+        useradd -s /sbin/nologin -M -g ${GROUP} ${USER}
     fi
     
     if [ "$INSTALL_TYPE" = "source" ]; then
