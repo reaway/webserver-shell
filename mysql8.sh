@@ -260,7 +260,7 @@ reset_root_password()
     log_info "============================================================================================"
     log_info ">>> MySQL ${MYSQL_VERSION} 安装完成!"
     log_info ">>> systemd管理: systemctl {start|stop|reload} mysqld"
-    log_info ">>> 初始 root 密码: ${mysqlpwd}"
+    log_info ">>> 初始root密码: ${mysqlpwd}"
 }
 
 install_mysql_8_yum_repository()
