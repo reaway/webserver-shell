@@ -49,7 +49,8 @@ install_lnmp() {
   disable_selinux
 
   ./php85.sh -a install
-  ./php_opcache.sh install
+  # php8.5以上默认开启OPcache，不需要单独安装
+  #./php_opcache.sh install
   ./php_composer.sh install
   ./nginx.sh -a install
   ./mysql8.sh -a install

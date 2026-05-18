@@ -28,13 +28,13 @@ restart_php() {
 install_opcache() {
   log_info 'Installing zend opcache...'
 
-  zend_ext="${ZEND_EXT_DIR}opcache.so"
-  if [ ! -s "${zend_ext}" ]; then
-    log_error 'OPcache install failed!'
+  ini_path="${PHP_INSTALL_DIR}/conf.d/004-opcache.ini"
+  if [ -s "${ini_path}" ]; then
+    log_error 'OPcache already installed!'
     exit 1
   fi
 
-  cat >${PHP_INSTALL_DIR}/conf.d/004-opcache.ini <<EOF
+  cat >${ini_path} <<EOF
 [Zend Opcache]
 zend_extension=opcache
 opcache.enable_cli=1
