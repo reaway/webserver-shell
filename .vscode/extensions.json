@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "EditorConfig.EditorConfig",
+    "mkhl.shfmt",
+    "timonwong.shellcheck"
+  ]
+}
