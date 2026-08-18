@@ -14,6 +14,16 @@ disable_selinux() {
   fi
 }
 
+set_timezone()
+{
+  # 查看当前时区
+  timedatectl
+  # 设置为东八区
+  timedatectl set-timezone Asia/Shanghai
+  # 查看当前时区
+  timedatectl
+}
+
 create_default_website() {
   \cp conf/nginx/nginx.conf ${NGINX_INSTALL_DIR}/conf/nginx.conf
   \cp -ra conf/nginx/rewrite ${NGINX_INSTALL_DIR}/conf/rewrite
@@ -51,6 +61,7 @@ EOF
 install_lnmp() {
   yum update -y
   disable_selinux
+  set_timezone
 
   ./php84.sh -a install
   # php8.5以上默认开启OPcache，不需要单独安装
