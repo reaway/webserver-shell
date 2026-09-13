@@ -33,12 +33,12 @@ cd webserver-shell
 ./php85.sh
 # 所有参数可选:
 #   -a <install|uninstall> 默认 install
-#   -v <版本号> 默认 8.5.8
+#   -v <版本号> 默认 8.5.10
 #   -t <source|repository> 默认 source
 ```
 
 - 参数: a 安装/卸载，默认 安装
-- 参数: v 版本号，默认 8.5.8
+- 参数: v 版本号，默认 8.5.10
 - 参数: t 源码/仓库安装，默认 源码安装
 
 ### Nginx
@@ -61,12 +61,12 @@ cd webserver-shell
 ./mysql8.sh
 # 所有参数可选:
 #   -a <install|uninstall> 默认 install
-#   -v <版本号> 默认 8.4.10
+#   -v <版本号> 默认 8.4.11
 #   -t <binary|source|repository> 默认 binary
 ```
 
 - 参数: a 安装/卸载，默认 安装
-- 参数: v 版本号，默认 8.4.10
+- 参数: v 版本号，默认 8.4.11
 - 参数: t 二进制/源码/仓库安装，默认 二进制安装
 
 ## 状态管理

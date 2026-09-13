@@ -2,7 +2,7 @@
 # Rocky Linux 9/10 - PHP8.4安装脚本
 # 所有参数可选:
 #   -a <install|uninstall> 默认 install
-#   -v <版本号> 默认 8.4.23
+#   -v <版本号> 默认 8.4.25
 #   -t <source|repository> 默认 source
 
 color_text() { echo -e " \e[0;$2m$1\e[0m"; }
@@ -21,7 +21,7 @@ fi
 
 cur_dir=$(pwd)
 
-PHP_VERSION='8.4.23'
+PHP_VERSION='8.4.25'
 PHP_INSTALL_DIR='/usr/local/php'
 
 USER='www'

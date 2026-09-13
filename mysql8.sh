@@ -3,7 +3,7 @@
 # Rocky Linux 9/10 - MySQL8.0/8.4安装脚本
 # 所有参数可选:
 #   -a <install|uninstall> 默认 install
-#   -v <版本号> 默认 8.4.10
+#   -v <版本号> 默认 8.4.11
 #   -t <binary|source|repository> 默认 binary
 
 color_text() { echo -e " \e[0;$2m$1\e[0m"; }
@@ -25,7 +25,7 @@ cur_dir=$(pwd)
 INSTALL_TYPE='binary' # 默认二进制安装 binary/source/repository
 GLIBC_VERSION='2.28'  # 默认glibc版本
 
-MYSQL_VERSION='8.4.10'
+MYSQL_VERSION='8.4.11'
 MYSQL_INSTALL_DIR='/usr/local/mysql'
 MYSQL_DATA_DIR='/usr/local/mysql/data'
 
