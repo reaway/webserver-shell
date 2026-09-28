@@ -1,0 +1,19 @@
+root = true
+
+# 全局默认配置
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Shell 脚本特定配置
+[*.sh]
+max_line_length = 100
+
+# Markdown 文档
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = 80
