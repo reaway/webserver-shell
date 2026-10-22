@@ -2,7 +2,7 @@
 # Rocky Linux 9/10 - Nginx安装脚本
 # 所有参数可选:
 #   -a <install|uninstall> 默认 install
-#   -v <版本号> 默认 1.30.5
+#   -v <版本号> 默认 1.30.6
 #   -t <source|repository> 默认 source
 
 color_text() { echo -e " \e[0;$2m$1\e[0m"; }
@@ -21,7 +21,7 @@ fi
 
 cur_dir=$(pwd)
 
-NGINX_VERSION='1.30.5'
+NGINX_VERSION='1.30.6'
 NGINX_INSTALL_DIR='/usr/local/nginx'
 
 USER='www'

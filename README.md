@@ -38,7 +38,7 @@ cd webserver-shell
 ```
 
 - 参数: a 安装/卸载，默认 安装
-- 参数: v 版本号，默认 8.5.11
+- 参数: v 版本号，默认 8.5.12
 - 参数: t 源码/仓库安装，默认 源码安装
 
 ### Nginx
@@ -47,12 +47,12 @@ cd webserver-shell
 ./nginx.sh
 # 所有参数可选:
 #   -a <install|uninstall> 默认 install
-#   -v <版本号> 默认 1.30.5
+#   -v <版本号> 默认 1.30.6
 #   -t <source|repository> 默认 source
 ```
 
 - 参数: a 安装/卸载，默认 安装
-- 参数: v 版本号，默认 1.30.5
+- 参数: v 版本号，默认 1.30.6
 - 参数: t 源码/仓库安装，默认 源码安装
 
 ### MySQL8.0/8.4
