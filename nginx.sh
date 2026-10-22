@@ -128,10 +128,10 @@ EOF
 }
 
 create_default_conf() {
-  \cp conf/nginx/nginx.conf ${NGINX_INSTALL_DIR}/conf/nginx.conf
-  \cp -ra conf/nginx/rewrite ${NGINX_INSTALL_DIR}/conf/rewrite
-  \cp -ra conf/nginx/php ${NGINX_INSTALL_DIR}/conf/php
-  \cp -ra conf/nginx/example ${NGINX_INSTALL_DIR}/conf/example
+  \cp ${cur_dir}/conf/nginx/nginx.conf ${NGINX_INSTALL_DIR}/conf/nginx.conf
+  \cp -ra ${cur_dir}/conf/nginx/rewrite ${NGINX_INSTALL_DIR}/conf/rewrite
+  \cp -ra ${cur_dir}/conf/nginx/php ${NGINX_INSTALL_DIR}/conf/php
+  \cp -ra ${cur_dir}/conf/nginx/example ${NGINX_INSTALL_DIR}/conf/example
 
   mkdir ${NGINX_INSTALL_DIR}/conf/vhost
 
